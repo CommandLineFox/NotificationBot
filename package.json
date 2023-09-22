@@ -1,0 +1,29 @@
+{
+  "name": "kyra",
+  "version": "1.0.0",
+  "description": "Reaction-role bot by Alex",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "shx rm -rf ./dist/ && tsc --project tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CommandLineFox/ReactionRole.git"
+  },
+  "author": "Alex",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CommandLineFox/ReactionRole/issues"
+  },
+  "homepage": "https://github.com/CommandLineFox/ReactionRole#readme",
+  "dependencies": {
+    "@discordjs/rest": "^2.0.1",
+    "axios": "^1.5.0",
+    "discord-api-types": "^0.37.57",
+    "discord.js": "^14.13.0",
+    "moment": "^2.29.4",
+    "mongodb": "^6.1.0",
+    "shx": "^0.3.4",
+    "typescript": "^5.2.2"
+  }
+}
