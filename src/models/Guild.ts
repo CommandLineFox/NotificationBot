@@ -1,9 +1,12 @@
 export interface Notification {
     channel: string;
     enabled: boolean;
-    publish: boolean;
-    role: string;
     last: string;
+    message: string;
+    role: string;
+    url: string;
+    publish: boolean;
+    playlist: string;
 }
 
 export interface Guild {

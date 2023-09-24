@@ -7,7 +7,6 @@ export interface Config {
     guild: string;
     owners: string[];
     api: string;
-    url: string;
     options: {
         disableMentions: "all" | "everyone" | "none";
         partials: Partials[];

@@ -2,9 +2,9 @@ import type { CommandInteraction } from "discord.js";
 import type { BotClient } from "../../../../core/BotClient";
 import Subcommand from "../../../../command/Subcommand";
 
-export default class NotificationMentionRemove extends Subcommand {
+export default class NotificationMessageRemove extends Subcommand {
     public constructor() {
-        super("remove", "Remove the notification role");
+        super("remove", "Remove the notification message");
     }
 
     async execute(interaction: CommandInteraction, client: BotClient): Promise<void> {
@@ -18,12 +18,12 @@ export default class NotificationMentionRemove extends Subcommand {
             return;
         }
 
-        if (!guild.notification?.role) {
-            await interaction.reply({ content: "The notification role has not been set yet.", ephemeral: true });
+        if (!guild.notification?.message) {
+            await interaction.reply({ content: "The notification message has not been set yet.", ephemeral: true });
             return;
         }
 
-        await client.database.guilds.updateOne({ id: guild.id }, { "$unset": { "notification.role": "" } });
-        await interaction.reply(`The notification role has been removed.`);
+        await client.database.guilds.updateOne({ id: guild.id }, { "$unset": { "notification.message": "" } });
+        await interaction.reply(`The notification message has been removed.`);
     }
 }
