@@ -33,7 +33,6 @@ export default class Ready extends Event {
                     continue;
                 }
 
-                console.log("Bwah");
                 const url = await checkNewVideo(client, guild);
                 if (!url) {
                     continue;
@@ -44,12 +43,10 @@ export default class Ready extends Event {
                 }
 
                 let role = "";
-                if (guild.notification.role) {
-                    if (guild.id === guild.notification.role) {
-                        role = "@everyone"
-                    } else {
-                        role = `<@&${guild.notification.role}>`;
-                    }
+                if (guild.notification.ping === "everyone") {
+                    role = "@everyone";
+                } else if (guild.notification.role) {
+                    role = `<@&${guild.notification.role}>`;
                 }
 
                 let text = `New video! ${url} ${role}`;
@@ -65,6 +62,6 @@ export default class Ready extends Event {
 
                 await client.database.guilds.updateOne({ id: guild.id }, { "$set": { "notification.last": url } });
             }
-        }, 10000);
+        }, 15000);
     }
 }

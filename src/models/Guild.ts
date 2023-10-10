@@ -5,6 +5,7 @@ export interface Notification {
     message: string;
     role: string;
     url: string;
+    ping: string;
     publish: boolean;
     playlist: string;
 }
