@@ -1,5 +1,6 @@
 export interface Notification {
     channel: string;
+    guidechannel: string;
     enabled: boolean;
     last: string;
     message: string;
@@ -8,6 +9,7 @@ export interface Notification {
     ping: string;
     publish: boolean;
     playlist: string;
+    guide: boolean;
 }
 
 export interface Guild {

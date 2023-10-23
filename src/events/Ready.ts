@@ -24,11 +24,13 @@ export default class Ready extends Event {
                     continue;
                 }
 
-                if (!guild?.notification.channel) {
-                    continue;
+                let channel;
+                if (guild.notification.guide === true && guild.notification.guidechannel) {
+                    channel = await client.channels.fetch(guild?.notification.guidechannel);
+                } else if (guild.notification.channel) {
+                    channel = await client.channels.fetch(guild?.notification.channel);
                 }
 
-                const channel = await client.channels.fetch(guild?.notification.channel);
                 if (!channel) {
                     continue;
                 }

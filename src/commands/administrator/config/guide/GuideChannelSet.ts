@@ -2,12 +2,12 @@ import { ChannelType, CommandInteraction } from "discord.js";
 import type { BotClient } from "../../../../core/BotClient";
 import Subcommand from "../../../../command/Subcommand";
 
-export default class NotificationChannelSet extends Subcommand {
+export default class GuideChannelSet extends Subcommand {
     public constructor() {
-        super("set", "Set the channel to send verifications in");
+        super("set", "Set the channel to send guide verifications in");
         this.data.addChannelOption(option =>
             option.setName("channel")
-                .setDescription("Choose the channel for sending notifications")
+                .setDescription("Choose the channel for sending guide notifications")
                 .setRequired(true)
         )
     }
@@ -24,17 +24,17 @@ export default class NotificationChannelSet extends Subcommand {
         }
 
         const channel = interaction.options.getChannel("channel", true);
-        if (guild.notification?.channel === channel.id) {
-            await interaction.reply({ content: "The channel for sending notifications has already been set to the same channel.", ephemeral: true });
+        if (guild.notification?.guidechannel === channel.id) {
+            await interaction.reply({ content: "The channel for sending guide notifications has already been set to the same channel.", ephemeral: true });
             return;
         }
 
         if (channel.type !== ChannelType.GuildText) {
-            await interaction.reply({ content: "The channel for sending notifications can only be a text channel.", ephemeral: true })
+            await interaction.reply({ content: "The channel for sending guide notifications can only be a text channel.", ephemeral: true })
             return;
         }
 
-        await client.database.guilds.updateOne({ id: guild.id }, { "$set": { "notification.channel": channel.id } });
-        await interaction.reply(`The channel for sending notifications has been set to <#${channel.id}>.`);
+        await client.database.guilds.updateOne({ id: guild.id }, { "$set": { "notification.guidechannel": channel.id } });
+        await interaction.reply(`The channel for sending guide notifications has been set to <#${channel.id}>.`);
     }
 }

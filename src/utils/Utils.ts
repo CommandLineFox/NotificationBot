@@ -32,8 +32,17 @@ export async function checkNewVideo(client: BotClient, guild: Guild): Promise<st
         const response = await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?key=${apiKey}&playlistId=${uploadsPlaylistId}&part=snippet&maxResults=1&order=date`);
 
         const videoId = response.data.items[0]?.snippet?.resourceId?.videoId;
+        const videoTitle = response.data.items[0]?.snippet?.title;
         if (!videoId) {
             return null;
+        }
+
+        if (videoTitle) {
+            if ((videoTitle as string).toLowerCase().endsWith("guide")) {
+                await client.database.guilds.updateOne({ id: guild.id }, { "$set": { "notification.guide": true } });
+            } else {
+                await client.database.guilds.updateOne({ id: guild.id }, { "$set": { "notification.guide": false } });
+            }
         }
 
         return `https://www.youtube.com/watch?v=${videoId}`;
