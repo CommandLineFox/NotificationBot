@@ -12,19 +12,12 @@ export async function checkNewVideo(client: BotClient, guild: Guild): Promise<st
             return null;
         }
 
-        let uploadsPlaylistId = guild.notification?.playlist;
+        let uploadsPlaylistId = guild.notification?.playlist
 
         if (!uploadsPlaylistId) {
             // Getting the Uploads playlist ID for the Channel
-            const channelResponse = await axios.get(`https://www.googleapis.com/youtube/v3/channels?key=${apiKey}&forCustomUsername=${url}&part=contentDetails`);
-            const channelData = channelResponse.data.items[0];
-
-            if (!channelData) {
-                console.log("Channel not found");
-                return null;
-            }
-
-            uploadsPlaylistId = channelData.contentDetails.relatedPlaylists.uploads;
+            const channelResponse = await axios.get(`https://www.googleapis.com/youtube/v3/channels?key=${apiKey}&id=${url}&part=contentDetails`);
+            uploadsPlaylistId = channelResponse.data.items[0].contentDetails.relatedPlaylists.uploads;
 
             if (!uploadsPlaylistId) {
                 console.log("No uploads playlist found for channel", url);
