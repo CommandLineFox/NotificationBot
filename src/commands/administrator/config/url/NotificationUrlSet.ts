@@ -25,11 +25,11 @@ export default class NotificationUrlSet extends Subcommand {
 
         const url = interaction.options.getString("url", true);
         if (guild.notification && guild.notification.url === url) {
-            await interaction.reply({ content: "The notification message is already set to that.", ephemeral: true });
+            await interaction.reply({ content: "The channel url is already set to that.", ephemeral: true });
             return;
         }
 
         await client.database.guilds.updateOne({ id: guild.id }, { "$set": { "notification.url": url } });
-        await interaction.reply(`The notification message has been set to **${url}**.`);
+        await interaction.reply(`The channel url has been set to **${url}**.`);
     }
 }

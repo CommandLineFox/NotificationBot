@@ -4,7 +4,6 @@ import { existsSync, readFileSync } from "fs";
 export interface Config {
     token: string;
     id: string;
-    guild: string;
     owners: string[];
     api: string;
     options: {
