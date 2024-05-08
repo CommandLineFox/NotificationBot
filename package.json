@@ -17,13 +17,13 @@
   },
   "homepage": "https://github.com/CommandLineFox/ReactionRole#readme",
   "dependencies": {
-    "@discordjs/rest": "^2.0.0",
-    "axios": "^1.5.1",
-    "discord-api-types": "^0.37.61",
-    "discord.js": "^14.12.1",
+    "@discordjs/rest": "^2.2.0",
+    "axios": "^1.6.2",
+    "discord-api-types": "^0.37.66",
+    "discord.js": "^14.14.1",
     "moment": "^2.29.4",
     "mongodb": "^6.2.0",
     "shx": "^0.3.4",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.3"
   }
 }

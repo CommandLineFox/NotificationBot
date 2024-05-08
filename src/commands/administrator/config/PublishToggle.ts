@@ -27,24 +27,24 @@ export default class NotificationToggle extends Subcommand {
         const option = interaction.options.getString("toggle", true);
         switch (option.toLowerCase()) {
             case "enable": {
-                if (guild.notification?.enabled === true) {
-                    await interaction.reply({ content: "Sending notifications is already enabled.", ephemeral: true });
+                if (guild.notification?.publish === true) {
+                    await interaction.reply({ content: "Publishing is already enabled.", ephemeral: true });
                     return;
                 }
 
-                await client.database.guilds.updateOne({ id: guild.id }, { "$set": { "notification.enabled": true } });
-                await interaction.reply("Sending notifications has been enabled.");
+                await client.database.guilds.updateOne({ id: guild.id }, { "$set": { "notification.publish": true } });
+                await interaction.reply("Publishing has been enabled.");
                 break;
             }
 
             case "disable": {
-                if (guild.notification?.enabled !== true) {
-                    await interaction.reply({ content: "Sending notifications is already disabled.", ephemeral: true });
+                if (guild.notification?.publish !== true) {
+                    await interaction.reply({ content: "Publishing is already disabled.", ephemeral: true });
                     return;
                 }
 
-                await client.database.guilds.updateOne({ id: guild.id }, { "$unset": { "notification.enabled": "" } });
-                await interaction.reply("Sending notifications has been disabled.");
+                await client.database.guilds.updateOne({ id: guild.id }, { "$unset": { "notification.publish": "" } });
+                await interaction.reply("Publishing has been disabled.");
                 break;
             }
         }

@@ -29,7 +29,7 @@ export default class GuideChannelSet extends Subcommand {
             return;
         }
 
-        if (channel.type !== ChannelType.GuildText) {
+        if (channel.type === ChannelType.GuildVoice) {
             await interaction.reply({ content: "The channel for sending guide notifications can only be a text channel.", ephemeral: true })
             return;
         }

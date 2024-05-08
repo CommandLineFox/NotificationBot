@@ -61,8 +61,6 @@ export default class Ready extends Event {
                 if (channel.type === ChannelType.AnnouncementThread) {
                     message.crosspost()
                 }
-
-                await client.database.guilds.updateOne({ id: guild.id }, { "$set": { "notification.last": url } });
             }
         }, 15000);
     }

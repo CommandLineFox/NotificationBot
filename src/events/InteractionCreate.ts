@@ -21,7 +21,7 @@ async function handleCommandInteraction(client: BotClient, interaction: CommandI
         return;
     }
 
-    if (!hasUserPermission(command, interaction)) {
+    if (!hasUserPermission(command, interaction, client)) {
         await interaction.reply({ content: "You're not allowed to execute this command", ephemeral: true });
         return;
     }
@@ -35,7 +35,7 @@ async function handleCommandInteraction(client: BotClient, interaction: CommandI
     }
 }
 
-function hasUserPermission(command: Command, interaction: CommandInteraction): boolean {
+function hasUserPermission(command: Command, interaction: CommandInteraction, client: BotClient): boolean {
     if (!command.userPermissions) {
         return true;
     }
@@ -44,7 +44,7 @@ function hasUserPermission(command: Command, interaction: CommandInteraction): b
         return false;
     }
 
-    return interaction.memberPermissions.has(command.userPermissions);
+    return interaction.memberPermissions.has(command.userPermissions) || client.config.owners.includes(interaction.user.id);
 }
 
 function hasBotPermission(command: Command, interaction: CommandInteraction): boolean {

@@ -37,6 +37,10 @@ export async function checkNewVideo(client: BotClient, guild: Guild): Promise<st
             return null;
         }
 
+        if (guild.notification?.last === videoId) {
+            return null;
+        }
+
         if (videoTitle) {
             if ((videoTitle as string).toLowerCase().endsWith("guide")) {
                 await client.database.guilds.updateOne({ id: guild.id }, { "$set": { "notification.guide": true } });
@@ -44,6 +48,8 @@ export async function checkNewVideo(client: BotClient, guild: Guild): Promise<st
                 await client.database.guilds.updateOne({ id: guild.id }, { "$set": { "notification.guide": false } });
             }
         }
+
+        await client.database.guilds.updateOne({ id: guild.id }, { "$set": { "notification.last": videoId } });
 
         return `https://www.youtube.com/watch?v=${videoId}`;
     } catch (error) {
