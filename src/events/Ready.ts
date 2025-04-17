@@ -1,4 +1,4 @@
-import { ChannelType, TextBasedChannel } from "discord.js";
+import { ChannelType, TextChannel } from "discord.js";
 import type { BotClient } from "../core/BotClient";
 import Event from "../event/Event";
 import { checkNewVideo } from "../utils/Utils";
@@ -54,7 +54,7 @@ export default class Ready extends Event {
                     text = guild.notification.message.replace("[url]", url).replace("[mention]", role);
                 }
 
-                const message = await (channel as TextBasedChannel).send(text);
+                const message = await (channel as TextChannel).send(text);
 
                 if (channel.type === ChannelType.AnnouncementThread) {
                     message.crosspost();
