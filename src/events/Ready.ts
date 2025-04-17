@@ -16,33 +16,31 @@ export default class Ready extends Event {
 
             while (await cursor.hasNext()) {
                 const guild = await cursor.next();
-                if (!guild?.notification?.enabled) {
-                    continue;
-                }
-
-                if (!guild.notification.url) {
+                if (!guild?.notification?.enabled || !guild.notification.url) {
                     continue;
                 }
 
                 let channel;
                 if (guild.notification.guide === true && guild.notification.guidechannel) {
-                    channel = await client.channels.fetch(guild?.notification.guidechannel);
+                    channel = await client.channels.fetch(guild.notification.guidechannel);
                 } else if (guild.notification.channel) {
-                    channel = await client.channels.fetch(guild?.notification.channel);
+                    channel = await client.channels.fetch(guild.notification.channel);
                 }
 
                 if (!channel) {
                     continue;
                 }
 
-                const url = await checkNewVideo(client, guild);
-                if (!url) {
+                const videoId = await checkNewVideo(client, guild);
+                if (!videoId) {
                     continue;
                 }
 
-                if (guild.notification.last === url) {
+                if (guild.notification.last === videoId) {
                     continue;
                 }
+
+                const url = `https://www.youtube.com/watch?v=${videoId}`;
 
                 let role = "";
                 if (guild.notification.ping === "everyone") {
@@ -59,7 +57,7 @@ export default class Ready extends Event {
                 const message = await (channel as TextBasedChannel).send(text);
 
                 if (channel.type === ChannelType.AnnouncementThread) {
-                    message.crosspost()
+                    message.crosspost();
                 }
             }
         }, 15000);
