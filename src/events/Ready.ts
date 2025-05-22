@@ -60,6 +60,6 @@ export default class Ready extends Event {
                     message.crosspost();
                 }
             }
-        }, 15000);
+        }, 60000);
     }
 }
