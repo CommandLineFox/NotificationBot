@@ -1,8 +1,20 @@
-# Files
-config.json
+### Temporary files
+/tmp
+/out-tsc
+
+### Node modules
+dist/*
+/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/.pnp
+.pnp.js
+
+### Other
+.vscode/*
+.idea/*
 *.tsbuildinfo
 
-#Folders
-.idea/
-node_modules/
-dist/
+### Data
+*.env*

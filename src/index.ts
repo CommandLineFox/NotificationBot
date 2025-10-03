@@ -1,18 +1,24 @@
-import { BotClient } from "./core/BotClient";
-import { getConfig } from "./core/Config";
-import { Database } from "./core/Database";
+import { Config } from "./config/config";
+import Database from "./database/database";
+import { BotClient } from "./types/client";
 
 async function main(): Promise<void> {
-    const config = getConfig("config.json");
-    if (!config) {
+    const config = Config.getInstance();
+
+    const database = Database.getInstance(config.getDatabaseConfig());
+    if (!database) {
         return;
     }
 
-    const database = new Database(config.database);
     await database.connect();
 
-    const client = new BotClient(config, database, config.options);
-    await client.login(config.token);
+    const client = new BotClient(config.getClientOptions());
+
+    try {
+        await client.login(config.getClientConfig().token);
+    } catch (error) {
+        console.error('Error logging in:', error);
+    }
 }
 
 main();

@@ -1,2 +1,2 @@
-# NotificationBot
-Bot for sending YT video notifications in a channel and publishing those messages
+# LelasBot
+Utility bot for the FFS server
