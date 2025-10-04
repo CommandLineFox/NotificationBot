@@ -1,2 +1,2 @@
-# LelasBot
-Utility bot for the FFS server
+# Scaler's bot
+Utility bot for Scaler's server
