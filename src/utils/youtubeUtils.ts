@@ -1,3 +1,4 @@
+import {container} from "@sapphire/framework";
 import {Config} from "../config/config";
 import {BotClient} from "../types/client";
 import {YouTubePlaylistResponse, YouTubeVideosResponse} from "../types/data";
@@ -150,6 +151,7 @@ export async function getLatestVideo(client: BotClient, guildId: string, channel
     try {
         const videoId = await getLatestUploadId(client, guildId, channelId);
         if (!videoId) {
+            container.logger.info(`Skipping ${channelId} because it has no uploads`);
             return null;
         }
 
@@ -157,11 +159,13 @@ export async function getLatestVideo(client: BotClient, guildId: string, channel
         const lastLive = await client.getGuildService().getLastLive(guildId, channelId);
 
         if (videoId === lastUpload || videoId === lastLive) {
+            container.logger.info(`Skipping ${channelId} because it's the same as the last upload or live`);
             return null;
         }
 
         const status = await getVideoLiveStatus(videoId);
         if (status !== "none") {
+            container.logger.info(`Skipping ${channelId} because it's a livestream`);
             return null;
         }
 
