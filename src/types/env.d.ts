@@ -26,5 +26,8 @@ declare namespace NodeJS {
 
         /** YouTube API key */
         readonly YOUTUBE_API_KEY: string;
+
+        /** Youtube Webhook URL */
+        readonly YOUTUBE_WEBHOOK_URL: string;
     }
 }

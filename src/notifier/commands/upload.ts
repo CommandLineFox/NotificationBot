@@ -1,5 +1,5 @@
 import { Command, CommandOptionsRunTypeEnum } from '@sapphire/framework';
-import {MessageFlags, TextChannel, Role, PermissionFlagsBits} from 'discord.js';
+import {MessageFlags, TextChannel, Role, /*PermissionFlagsBits*/} from 'discord.js';
 import { GuildService } from '../../services/guildService';
 import { CustomResponse } from '../../types/customResponse';
 
@@ -14,7 +14,7 @@ export class UploadCommand extends Command {
             detailedDescription: 'Enable/disable upload alerts, set the Discord channel, or set the mention role.',
             runIn: CommandOptionsRunTypeEnum.GuildText,
             preconditions: ['UptimeCheck'],
-            requiredUserPermissions: PermissionFlagsBits.ManageGuild
+            //requiredUserPermissions: PermissionFlagsBits.ManageGuild
         });
     }
 

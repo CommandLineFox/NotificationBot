@@ -21,6 +21,7 @@ export type DatabaseConfig = {
 
 export type ApiConfig = {
     youtubeApiKey: string;
+    youtubeWebhookUrl: string;
 }
 
 export class Config {
@@ -60,7 +61,8 @@ export class Config {
             };
 
             const apiConfig: ApiConfig = {
-                youtubeApiKey: process.env.YOUTUBE_API_KEY!
+                youtubeApiKey: process.env.YOUTUBE_API_KEY!,
+                youtubeWebhookUrl: process.env.YOUTUBE_WEBHOOK_URL!,
             }
 
             this.instance = new Config(
