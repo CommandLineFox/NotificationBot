@@ -1,7 +1,7 @@
-import { Command, CommandOptionsRunTypeEnum } from '@sapphire/framework';
-import {MessageFlags, TextChannel, Role, /*PermissionFlagsBits*/} from 'discord.js';
-import { GuildService } from '../../services/guildService';
-import { CustomResponse } from '../../types/customResponse';
+import {Command, CommandOptionsRunTypeEnum} from '@sapphire/framework';
+import {MessageFlags, TextChannel, Role, PermissionFlagsBits} from 'discord.js';
+import {GuildService} from '../../services/guildService';
+import {CustomResponse} from '../../types/customResponse';
 
 export class LiveCommand extends Command {
     private guildService = new GuildService();
@@ -14,7 +14,7 @@ export class LiveCommand extends Command {
             detailedDescription: 'Enable/disable live alerts, set the Discord channel, or set the mention role.',
             runIn: CommandOptionsRunTypeEnum.GuildText,
             preconditions: ['UptimeCheck'],
-            //requiredUserPermissions: PermissionFlagsBits.ManageGuild
+            requiredUserPermissions: PermissionFlagsBits.ManageGuild
         });
     }
 
